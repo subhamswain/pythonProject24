@@ -1,0 +1,58 @@
+{% extends 'api/base.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+   <div class="col-sm-4">
+
+    <h1>User Permission</h1>
+<form action="/watper/{{id}}" method="POST">
+    <div style="margin-left: 20px;">
+        <input type="checkbox" id="firstgroup"/>Select All<br>
+        {% for i in permi %}
+        <input type="checkbox" class="order" id="value {{i}}" value="{{i.name}}"  name="perm">{{i}}<br>
+        {% endfor %}
+        </div>
+    <div class="d-grid gap-2 col-6 mx-auto">
+        <button class="btn btn-primary" type="submit">Add</button>
+    </div>
+      <div id="result"></div>
+      <div id="form"></div>
+
+</form>
+{% endblock content%}
+{% block javascripts %}
+<!-- <script src="{% static 'assets/js/myadmin/permit.js' %}"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+function check() {
+  document.getElementsByClassName("order").checked = true;
+}
+</script>
+
+<!-- <script>
+    $("#firstgroup").click(function() {
+      $('#form').text('');
+      $('#result').text('');
+      $('input:checkbox').not(this).prop('checked', this.checked);
+      if ($(".order:checked").length == 3) {
+        $('#form').text('all of them are checked');
+      }
+    });
+    $(".order").on('click', function() {
+      var selectedItems = '';
+      $('#result').text('');
+      $('#form').text('');
+      if ($(".order:checked").length == 3) {
+        $('#form').text('all of them are checked');
+        $("#firstgroup").prop('checked','checked');
+      } else if ($(".order:checked").length > 0) {
+        $("#firstgroup").prop('checked','');
+        $(".order:checked").each(function(i, d) {
+          selectedItems += d.id + ',';
+        });
+        $('#result').text('Checked Checkboxes: ' + selectedItems.substring(0, selectedItems.length - 1));
+        $('#form').text('Total number of checked checkboxes: ' + $(".order:checked").length);
+      }
+    });
+</script> -->
+{% endblock javascripts %}
